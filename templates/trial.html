@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
+
+    <style>
+        .number-count {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            color: #474242;
+            margin-bottom: 15px;
+        }
+
+        body {
+            background-color: #c3ced79d;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 0px;
+            color: #474242;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #474242;
+            opacity: 1;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #474242;
+            opacity: 1;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #fff;
+            margin-top: 0;
+            width: 100%;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .side-navbar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: -250px;
+            background-color: #fff;
+            padding-top: 20px;
+            transition: 0.5s;
+        }
+
+        .side-navbar a {
+            padding: 16px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #474242;
+            display: block;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        .side-navbar a:hover {
+            color: #474242;
+        }
+
+        .toggle-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 20px;
+            background-color: transparent;
+            z-index: 2;
+            transition: 0.5s;
+        }
+
+        .toggle-area:hover+.side-navbar,
+        .side-navbar:hover,
+        .toggle-area.active+.side-navbar {
+            left: 0;
+        }
+
+        .toggle-area:hover,
+        .side-navbar:hover,
+        .toggle-area.active {
+            cursor: pointer;
+        }
+
+        h3 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 5px;
+            color: #474242;
+            opacity: 1;
+            margin-left: 25px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 4px;
+            text-align: left;
+            color: #000;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #000;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: #f1f1f1;
+            color: #474242;
+            font-size: 18px;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h4 {
+            font-size: 20px;
+            font-weight: normal;
+            margin-top: 20px;
+            color: #474242;
+            opacity: 1;
+            margin-left: 25px;
+        }
+
+        input {
+            font-size: 15px;
+            margin-left: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            /* Adjust as needed */
+        }
+
+        .card {
+            flex: 0 0 calc(50% - 20px);
+            /* Adjust card width as needed */
+            margin-bottom: 20px;
+            background-color: #f1f1f1;
+            color: #fff;
+            padding: 10px;
+            margin-right: 25px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        h5 {
+            color: #474242;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            font-style: bold;
+            padding: 20px;
+        }
+
+        .course-profile-container {
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 20px;
+            width: 96.2%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        select {
+            margin-top: 8px;
+            padding: 20px;
+            width: 80%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        admin-info {
+            margin-bottom: 20px;
+            /* Adjust margin as needed */
+            text-align: center;
+            margin-left: 30px;
+            /* Center-align text */
+        }
+
+        .admin-info i {
+            display: block;
+            margin: auto;
+            /* Center the icon horizontally */
+            margin-bottom: 10px;
+            margin-left: 30px;
+        }
+
+        /* Adjust margin to vertically center the icon */
+
+        p {
+            margin-left: 33px;
+            font-size: 20px;
+        }
+
+        .chart-container {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            height: 400px;
+            /* Fixed height for all chart containers */
+            display: flex;
+            justify-content: center;
+            /* Center align horizontally */
+            align-items: center;
+            /* Center align vertically */
+        }
+
+        .canvas-container {
+            height: 100%;
+            /* Ensure canvas fills parent height */
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+                /* Decrease height on smaller screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .chart-container {
+                height: 250px;
+                /* Further decrease height on even smaller screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toggle-area" onclick="toggleSidebar()"></div>
+
+    <div class="side-navbar">
+        <div class="admin-info">
+            <i class="fas fa-user-circle fa-9x"></i> <!-- Adjust the size of the icon as needed -->
+            <p>Welcome Admin</p>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='logo.png') }}">
+            </a>
+        </nav>
+       
+        <h1>Welcome to SSN NPTEL Examinations Management System</h1>
+        <h2>{{post_request}}General Statistics</h2>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <form id="courseSelect" method="post" action="{{ url_for('yearwise_statistics')}}">
+                        <div class="input-group mb-3">
+                            <select name="course" id="courseSelector" class="form-control" style="height:50px;">
+                                <option value="None">Select the course</option>
+                                {% for year in acc_year %}
+                                {{acc_year}}
+                                <option value="{{ year[0] }}">{{ year[0] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <select name="sem_type" id="semesterSelector" class="form-control" style="height:50px;">
+                            <option value="None">Select sem type</option>
+                            {% for sem in sem_type %}
+                            <option value="{{ sem[0] }}">{{ sem[0] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                    <input type="hidden" name="course_selected" id="courseSelected" value="">
+                    <input type="hidden" name="sem_selected" id="semSelected" value="">
+                </div>
+                </form>
+            </div>
+            </div>
+            
+            {% if not post_request %}
+             
+            <div id="dashboard" class="container">
+                <h3>Welcome Admin</h3>
+                <h4>Year-wise Enrollment</h4>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="yearwiseEnrollmentChart"></canvas>
+                </div>
+                <div class="container">
+                    <h4>Subject Enrollment</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Subject Name</th>
+                                <th>Number of Enrolled Students</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subjectEnrollmentTableBody">
+                            <!-- Subject enrollment data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {% endif %}
+
+            {% if post_request %}
+        <div class = 'container'>
+            <div class="container">
+                <h3>Analysis of {{selected_sem}} Semesters in the Academic Year {{selected_year}}</h3>
+                <h4>Count of Students: <span id="enrollement_count">{{ enrollment_count[0][0] }}</span></h4>
+                <h4>Count of Courses: <span id="course_count">{{ course_count[0][0] }}</span></h4>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="chart-container" style="height: 400px;">
+                            <canvas id="enrollement_odd_even"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container" style="height: 400px;">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <button id="viewToppersBtn" class="btn btn-primary">View Toppers</button>
+
+
+                <div id="toppersTable">
+                    <h2>Topper Details</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Regno</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>mark</th>
+                                <th>year</th>
+                                <th>sem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="toppersTableBody">
+                            <!-- Table rows will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <script>
+
+            {% if course %}
+            document.getElementById("courseSelector").value = "{{ course }}";
+            {% endif %}
+
+            $(document).ready(function () {
+                    $('#courseSelector').change(function () {
+                        $('#courseSelected').val($(this).val());
+                    });
+
+                    $('#semesterSelector').change(function () {
+                        $('#semSelected').val($(this).val());
+                    });
+                });
+
+
+            {% if not post_request %}
+            document.addEventListener('DOMContentLoaded', function () {
+            // Data for year-wise enrollment chart
+            var yearwiseEnrollmentData = {{ yearwise_enrollment_data | tojson }};
+            var years = yearwiseEnrollmentData.map(function(item) {
+                return item.year;
+            });
+            var enrollments = yearwiseEnrollmentData.map(function(item) {
+                return item.enrollment_count;
+            });
+
+            // Bar Chart for Year-wise Enrollment
+            var ctx = document.getElementById('yearwiseEnrollmentChart').getContext('2d');
+            var yearwiseEnrollmentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'Enrollment Count',
+                        data: enrollments,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Enrollment Count',
+                                font: {
+                                    family: 'Arial',
+                                    size: 14,
+                                    weight: '400'
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year',
+                                font: {
+                                    family: 'Arial',
+                                    size: 14,
+                                    weight: '400'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Data for subject enrollment table
+            var subjectEnrollmentData = {{ subject_enrollment_data | tojson }};
+            var subjectEnrollmentTableBody = document.getElementById('subjectEnrollmentTableBody');
+            subjectEnrollmentData.forEach(function(subject) {
+                var row = document.createElement('tr');
+                row.innerHTML = `<td>${subject.name}</td><td>${subject.count}</td>`;
+                subjectEnrollmentTableBody.appendChild(row);
+            });
+        });
+    </script>
+    {% endif %}
+        
+            {% if post_request %}
+            var selectedYear = "{{ selected_year }}";
+            var selectedSem = "{{ selected_sem }}";
+
+            console.log(selectedSem)
+            console.log(selectedYear)
+
+            var semEnrollmentData = {{ sem_enrollment | tojson }};
+
+            // Extracting labels and data for the pie chart
+            var semesters = semEnrollmentData.map(function (item) {
+            return item[0];
+            });
+
+            var semesterCounts = semEnrollmentData.map(function (item) {
+            return item[1];
+            });
+
+            // Pie Chart
+            var ctx2 = document.getElementById('pieChart').getContext('2d');
+            var pieChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+            labels: semesters, // Use extracted semesters as labels
+            datasets: [{
+            label: 'Enrollment by Semester',
+            data: semesterCounts, // Use extracted counts as data
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+
+            ],
+            borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+            // Add more colors if needed
+            ],
+            borderWidth: 1
+            }]
+            },
+            options: {
+                plugins: {
+                        datalabels: {
+                            display: true,
+                            align: 'end',
+                            anchor: 'center',
+                            formatter: (value, context) => value
+                        }
+                    }
+                },
+            plugins: [ChartDataLabels]
+            });
+
+            // Line Chart for Mark Share 50-80
+            var markShare50to80Data = {{ markshare_50_80 | tojson }};
+
+            // Extracting years and data for 50-80 mark range
+            var markShare50to80Years = markShare50to80Data.map(function (item) {
+            return item[0];
+            });
+
+            var markShare50to80OddSem = markShare50to80Data.map(function (item) {
+            return item[1];
+            });
+
+            var markShare50to80EvenSem = markShare50to80Data.map(function (item) {
+            return item[2];
+            });
+
+            // Set the selected year and semester from Flask variables
+                var selectedYear = "{{ selected_year }}";
+                var selectedSem = "{{ selected_sem }}";
+
+                // Function to update the chart colors
+                function updateChartColors(chart, year, sem) {
+                    chart.data.datasets.forEach((dataset) => {
+                        dataset.backgroundColor = dataset.backgroundColor.map((color, index) => {
+                            if (chart.data.labels[index] == year && dataset.label === sem) {
+                                return color.replace('0.2', '0.5'); // Highlight the selected bar
+                            } else {
+                                return color.replace('0.2', '0.2'); // Keep the original opacity for other bars
+                            }
+                        });
+                        dataset.borderColor = dataset.borderColor.map((color, index) => {
+                            if (chart.data.labels[index] == year && dataset.label === sem) {
+                                return color; // Keep the border color for the selected bar
+                            } else {
+                                return 'rgba(0, 0, 0, 0)'; // Remove the border color for other bars
+                            }
+                        });
+                    });
+                    chart.update();
+                }
+
+                // Initialize the chart
+                var ctx3 = document.getElementById('enrollement_odd_even').getContext('2d');
+                var enrollment_odd_even = new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: markShare50to80Years,
+                        datasets: [{
+                            label: 'odd',
+                            data: markShare50to80OddSem,
+                            backgroundColor: markShare50to80Years.map(() => 'rgba(255, 99, 132, 0.2)'),
+                            borderColor: markShare50to80Years.map(() => 'rgba(255, 99, 132, 1)'),
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'even',
+                            data: markShare50to80EvenSem,
+                            backgroundColor: markShare50to80Years.map(() => 'rgba(54, 162, 235, 0.2)'),
+                            borderColor: markShare50to80Years.map(() => 'rgba(54, 162, 235, 1)'),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'std count',
+                                    font: {
+                                        family: 'Arial', // Custom font family
+                                        size: 14,       // Custom font size
+                                        weight: '400'  // Custom font weight
+                                    }
+                                }
+                            },
+                            x: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Accademic year',
+                                    font: {
+                                        family: 'Arial', // Custom font family
+                                        size: 14,       // Custom font size
+                                        weight: '400'  // Custom font weight
+                                    }
+                                }
+                            },
+                        },
+                        plugins: {
+                            datalabels: {
+                                display: true,
+                                align: 'end',
+                                anchor: 'end',
+                                formatter: (value, context) => value
+                            }
+                        }
+                    },
+                    plugins: [ChartDataLabels]
+                });
+
+                // Update chart colors if selectedYear and selectedSem are provided
+                if (selectedYear && selectedSem) {
+                    updateChartColors(enrollment_odd_even, selectedYear, selectedSem);
+                }
+
+
+            document.getElementById('viewToppersBtn').addEventListener('click', function () {
+                    var toppersTable = document.getElementById('toppersTable');
+                    if (toppersTable.style.display === 'none') {
+                        toppersTable.style.display = 'block';
+                    } else {
+                        toppersTable.style.display = 'none';
+                    }
+                });
+
+                // JavaScript code to populate the toppers table dynamically
+                document.getElementById('viewToppersBtn').addEventListener('click', function () {
+                    var toppersTable = document.getElementById('toppersTable');
+                    var toppersTableBody = document.getElementById('toppersTableBody');
+                    toppersTableBody.innerHTML = ''; // Clear existing table rows
+                    if (toppersTable.style.display === '' || toppersTable.style.display === 'none') {
+                        toppersTable.style.display = 'block';
+                        // Populate table rows dynamically
+                        var toppersData = {{ toppers_data | tojson}};
+                toppersData.forEach(function (topper) {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+                <td>${topper[0]}</td>
+                <td>${topper[1]}</td>
+                <td>${topper[2]}</td>
+                <td>${topper[3]}</td>
+                <td>${topper[4]}</td>
+                <td>${topper[5]}</td>
+                `;
+                    toppersTableBody.appendChild(row);
+                });
+                } else {
+                    toppersTable.style.display = 'none';
+                }
+                });
+
+                document.getElementById('downloadChart').addEventListener('click', function () {
+                    html2canvas(document.getElementById('myChart')).then(function (canvas) {
+                        canvas.toBlob(function (blob) {
+                            saveAs(blob, 'chart.png'); // Save as PNG file
+                        });
+                    });
+                });
+              {% endif %}  
+        </script>
+    </div>
+</body>
+
+</html>
